@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Ecommerce Store</title>
+    <style>
+        body {
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: #dde6ee;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #3b6fc3;
+            color:white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #cart-info {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #product-container {
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .product-card {
+            width:200px;
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align:center;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <h1>E-Commerce Store</h1>
+    <p id="cart-info">Cart items: 0</p>
+    </header>
+
+    <div id="product-container"></div>
+
+    <script>
+        const products = [
+            {
+                id: 1,
+                name: "PlayStation 5 Pro",
+                price: 599,
+                category: "Electronics",
+                image: "playstation5.jpg",
+            },
+
+            {
+                id: 2,
+                name: "Apple Watch Series 10",
+                price: 299,
+                category: "Electronics",
+                image: "applewatch.jpg"
+            },
+
+            {
+                id: 3,
+                name: "Wilson Basketball",
+                price: 79,
+                category: "Sports",
+                image: "basketball.jpg",
+            }
+        ];
+
+        let cartCount = 0;
+        const productContainer = document.getElementById("product-container");
+        const cartInfo = document.getElementById("cart-info");
+
+        function updateCart() {
+            cartInfo.textContent = "Cart Items: " + cartCount;
+        }
+
+        function addToCart() {
+            cartCount++;
+            updateCart();
+        }
+
+        function displayProducts() {
+            for (let i = 0; i < products.length; i++) {
+                const product = products[i];
+                const card = document.createElement("div");
+                card.className = "product-card";
+
+                const image = document.createElement("img");
+                image.src = product.image;
+                image.alt = product.name;
+
+                const title = document.createElement("h2");
+                title.textContent = product.name;
+
+                const price = document.createElement("p");
+                price.textContent = "Price: $" + product.price;
+
+                const category = document.createElement("p");
+                category.textContent = "Category: " + product.category;
+
+                const button = document.createElement("button");
+                button.textContent = "Add to Cart";
+                button.onclick = addToCart;
+
+                card.appendChild(image);
+                card.appendChild(title);
+                card.appendChild(price);
+                card.appendChild(category);
+                card.appendChild(button);
+
+                productContainer.appendChild(card);
+            }
+        }
+        displayProducts();
+    </script>
+</body>
+</html>
